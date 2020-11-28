@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "lint": "eslint"
+    "test": "jest --passWithNoTests --watch",
+    "lint": "eslint 'src/** --fix'"
   },
   "repository": {
     "type": "git",
