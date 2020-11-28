@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --passWithNoTests --watch",
+    "test:husky": "jest --passWithNoTests",
     "lint": "eslint 'src/** --fix'"
   },
   "repository": {
