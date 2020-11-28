@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/diegolopes98/surveys-api-clean-node/issues"
   },
-  "homepage": "https://github.com/diegolopes98/surveys-api-clean-node#readme"
+  "homepage": "https://github.com/diegolopes98/surveys-api-clean-node#readme",
+  "devDependencies": {
+    "git-commit-msg-linter": "^3.0.0"
+  }
 }
