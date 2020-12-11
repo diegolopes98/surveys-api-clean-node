@@ -18,8 +18,9 @@ export const MongoHelper = {
     return this.client.db().collection(name)
   },
 
-  map (collectionResult: any): any {
-    const mappedResult = { id: collectionResult._id, ...collectionResult }
+  map (collectionResultRaw: any): any {
+    const { _id, ...collectionResult } = collectionResultRaw
+    const mappedResult = { id: _id, ...collectionResult }
     return mappedResult
   }
 }
