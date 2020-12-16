@@ -7,6 +7,13 @@ export const adaptRoute = (controller: Controller) => {
       body: req.body
     }
     const httpReponse: HttpResponse = await controller.handle(httpRequest)
-    res.status(httpReponse.statusCode).send(httpReponse.body)
+    if (httpReponse.statusCode.toString().match(/2[0-9][0-9]/)) {
+      res.status(httpReponse.statusCode).send(httpReponse.body)
+    } else {
+      const error: string = httpReponse.body.message
+      res.status(httpReponse.statusCode).send({
+        error
+      })
+    }
   }
 }
