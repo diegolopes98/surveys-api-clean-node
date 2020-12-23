@@ -32,4 +32,11 @@ describe('Controller: Login', () => {
     const response: HttpResponse = await sut.handle(makeFakeRequest(data))
     expect(response).toEqual(badRequest(new MissingParamError('email')))
   })
+
+  test('Should return 400 if missing password', async () => {
+    const { sut } = makeSut()
+    const { password, ...data } = makeFakeData()
+    const response: HttpResponse = await sut.handle(makeFakeRequest(data))
+    expect(response).toEqual(badRequest(new MissingParamError('password')))
+  })
 })
