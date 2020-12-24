@@ -35,6 +35,12 @@ const makeFakeRequest = (data): HttpRequest => ({
   }
 })
 
+const makeFakeError = (): Error => {
+  const error = new Error()
+  error.stack = 'fake_stack'
+  return error
+}
+
 describe('Controller: Login', () => {
   test('Should return 400 if missing email', async () => {
     const { sut } = makeSut()
@@ -69,9 +75,7 @@ describe('Controller: Login', () => {
   test('Should return 500 if EmailValidator throws', async () => {
     const { sut, emailValidatorStub } = makeSut()
     jest.spyOn(emailValidatorStub, 'isValid').mockImplementationOnce((email: String) => {
-      const error = new Error()
-      error.stack = 'fake_stack'
-      throw error
+      throw makeFakeError()
     })
     const data = makeFakeData()
     const response = await sut.handle(makeFakeRequest(data))
