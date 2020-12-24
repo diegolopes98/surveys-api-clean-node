@@ -20,7 +20,7 @@ const makeSut = (): SutTypes => {
   }
 }
 
-describe('Bcrypt Adapter', () => {
+describe('Adapter: Bcrypt', () => {
   test('Should call bcrypt with correct values', async () => {
     const { sut } = makeSut()
     const hashSpy = jest.spyOn(bcrypt, 'hash')
