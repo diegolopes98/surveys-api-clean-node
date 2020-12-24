@@ -1,5 +1,6 @@
 import { Authentication } from '../../../domain/usecases/authentication/authentication'
 import { InvalidParamError, MissingParamError } from '../../errors'
+import { checkMissingParams } from '../../helpers/controller-helper'
 import { badRequest, serverError } from '../../helpers/http-helper'
 import { HttpRequest, HttpResponse, EmailValidator, Controller } from './login-protocols'
 
@@ -14,11 +15,8 @@ export class LoginController implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const requiredFields = ['email', 'password']
-      for (const field of requiredFields) {
-        if (!httpRequest.body[field]) {
-          return badRequest(new MissingParamError(field))
-        }
-      }
+      const missingParam = checkMissingParams(requiredFields, httpRequest)
+      if (missingParam) return badRequest(new MissingParamError(missingParam))
 
       const { email, password } = httpRequest.body
 
