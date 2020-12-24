@@ -1,8 +1,7 @@
 import { InvalidParamError, MissingParamError } from '../../errors'
 import { badRequest, serverError, unauthorized } from '../../helpers/http-helper'
-import { HttpRequest, HttpResponse, EmailValidator } from './login-protocols'
+import { HttpRequest, HttpResponse, EmailValidator, Authentication } from './login-protocols'
 import { LoginController } from './login'
-import { Authentication } from '../../../domain/usecases/authentication/authentication'
 
 const makeAuthenticationStub = (): Authentication => {
   class AuthenticationStub implements Authentication {
