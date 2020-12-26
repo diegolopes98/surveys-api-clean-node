@@ -7,7 +7,7 @@ export class ValidatorComposite implements Validator {
     this.validators = validators
   }
 
-  validate (input: { [key: string]: any }): Error {
+  validate (input: any): Error {
     for (const validator of this.validators) {
       const error = validator.validate(input)
       if (error) return error

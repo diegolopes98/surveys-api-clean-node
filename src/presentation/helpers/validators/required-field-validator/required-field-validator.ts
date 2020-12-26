@@ -7,7 +7,7 @@ export class RequiredFieldValidator implements Validator {
     this.fieldName = fieldName
   }
 
-  validate (input: { [key: string]: any }): Error {
+  validate (input: any): Error {
     if (!input[this.fieldName]) return new MissingParamError(this.fieldName)
   }
 }
