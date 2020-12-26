@@ -1,4 +1,4 @@
-import { RequiredFieldValidator } from '../../../../presentation/helpers/validators/required-field-validator'
+import { RequiredFieldValidator } from '../../../../presentation/helpers/validators/required-field-validator/required-field-validator'
 import { ValidatorComposite } from '../../../../presentation/helpers/validators/validators-composite'
 import { Validator } from '../../../../presentation/protocols'
 import { makeSignUpValidator } from './signup-validators'
