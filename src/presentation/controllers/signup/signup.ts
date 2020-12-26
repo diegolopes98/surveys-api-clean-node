@@ -15,7 +15,9 @@ export class SignUpController implements Controller {
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      this.validator.validate(httpRequest.body)
+      const error = this.validator.validate(httpRequest.body)
+      if (error) return badRequest(error)
+
       const requiredFields = ['name', 'email', 'password', 'passwordConfirmation']
       const missingParam = checkMissingParams(requiredFields, httpRequest)
       if (missingParam) return badRequest(new MissingParamError(missingParam))
