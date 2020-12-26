@@ -32,10 +32,16 @@ const makeSut = (): SutTypes => {
 }
 
 describe('Validators: Composite', () => {
-  test('Should return error if one validator return an error', () => {
+  test('Should return error if one validator returns an error', () => {
     const { sut, validatorsStub } = makeSut()
     jest.spyOn(validatorsStub[0], 'validate').mockReturnValueOnce(new Error('test_error'))
     const error = sut.validate({ test: 'test' })
     expect(error).toEqual(new Error('test_error'))
+  })
+
+  test('Should return undefined if no one validator returns an error', () => {
+    const { sut } = makeSut()
+    const error = sut.validate({ test: 'test' })
+    expect(error).toBeUndefined()
   })
 })
