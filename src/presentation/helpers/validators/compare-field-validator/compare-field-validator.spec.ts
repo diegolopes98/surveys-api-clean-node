@@ -17,4 +17,10 @@ describe('Validator: Compare Field', () => {
     const error = sut.validate({ test: 'test', test2: 'invalid' })
     expect(error).toEqual(new InvalidParamError('test2'))
   })
+
+  test('Should not return InvalidParamError when fields match', () => {
+    const { sut } = makeSut('test', 'test2')
+    const error = sut.validate({ test: 'test', test2: 'test' })
+    expect(error).toBeUndefined()
+  })
 })
