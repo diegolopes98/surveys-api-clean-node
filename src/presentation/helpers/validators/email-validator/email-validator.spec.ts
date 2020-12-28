@@ -33,6 +33,12 @@ describe('Validator: Email', () => {
     expect(isValidSpy).toHaveBeenCalledWith('any_mail@mail.com')
   })
 
+  test('Should throw if EmailValidatorAdapter throws', () => {
+    const { sut, emailValidatorStub } = makeSut()
+    jest.spyOn(emailValidatorStub, 'isValid').mockImplementationOnce(() => { throw new Error() })
+    expect(sut.validate).toThrow()
+  })
+
   test('Should return InvalidParamError when invalid email is provided', () => {
     const { sut, emailValidatorStub } = makeSut()
     jest.spyOn(emailValidatorStub, 'isValid').mockReturnValueOnce(false)
