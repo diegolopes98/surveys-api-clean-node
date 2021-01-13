@@ -68,7 +68,7 @@ describe('Usecase: DbAuthentication', () => {
     await expect(promise).rejects.toThrow()
   })
 
-  test('Should return LoadAccountByEmailRepository returns null', async () => {
+  test('Should return null LoadAccountByEmailRepository returns null', async () => {
     const { sut, loadAccountStub } = makeSut()
     jest.spyOn(loadAccountStub, 'load').mockReturnValueOnce(null)
     const response = await sut.auth(makeFakeAuthModel())
@@ -87,5 +87,12 @@ describe('Usecase: DbAuthentication', () => {
     jest.spyOn(hashComparerStub, 'compare').mockRejectedValueOnce(new Error('fake_error'))
     const promise = sut.auth(makeFakeAuthModel())
     await expect(promise).rejects.toThrow()
+  })
+
+  test('Should return null HashComparer returns false', async () => {
+    const { sut, hashComparerStub } = makeSut()
+    jest.spyOn(hashComparerStub, 'compare').mockReturnValueOnce(Promise.resolve(false))
+    const response = await sut.auth(makeFakeAuthModel())
+    expect(response).toBeNull()
   })
 })
