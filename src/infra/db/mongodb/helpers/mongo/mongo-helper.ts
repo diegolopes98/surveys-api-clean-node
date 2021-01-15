@@ -28,8 +28,7 @@ export const MongoHelper = {
   map (collectionResultRaw: any): any {
     if (collectionResultRaw) {
       const { _id, ...collectionResult } = collectionResultRaw
-      const mappedResult = { id: _id, ...collectionResult }
-      return mappedResult
+      return { id: _id, ...collectionResult }
     }
     return null
   }
