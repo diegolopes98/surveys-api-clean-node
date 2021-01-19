@@ -1,5 +1,5 @@
-import { SignUpController } from './signup'
-import { AddAccount, AddAccountModel, AccountModel, Validator, HttpRequest } from './signup-protocols'
+import { SignUpController } from './signup-controller'
+import { AddAccount, AddAccountModel, AccountModel, Validator, HttpRequest } from './signup-controller-protocols'
 import { badRequest, ok, serverError } from '../../helpers'
 
 const makeAddAccount = (): AddAccount => {
