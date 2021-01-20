@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node /dist/main/server.js",
+    "start": "node ./dist/main/server.js",
     "build": "rimraf dist && tsc",
     "start:dev": "sucrase-node src/main/server.ts",
     "test": "jest --passWithNoTests --silent --noStackTrace --runInBand",
@@ -55,7 +55,6 @@
     "@types/jsonwebtoken": "^8.5.0",
     "bcrypt": "^5.0.0",
     "express": "^4.17.1",
-    "fast-glob": "^3.2.5",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.3",
     "validator": "^13.5.2"
