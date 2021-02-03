@@ -25,7 +25,7 @@ const makeValidatorStub = (): Validator => {
 const makeAuthenticationStub = (): Authentication => {
   class AuthenticationStub implements Authentication {
     async auth (data: AuthenticationModel): Promise<string> {
-      return Promise.resolve('token')
+      return Promise.resolve('any_token')
     }
   }
   return new AuthenticationStub()
@@ -102,7 +102,7 @@ describe('Controller: SignUp', () => {
     const { sut } = makeSut()
     const httpRequest = makeFakeRequest(makeFakeAccount())
     const httpResponse = await sut.handle(httpRequest)
-    expect(httpResponse).toEqual(ok(makeFakeAccount()))
+    expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }))
   })
 
   test('Should call Validator with correct values', async () => {
