@@ -1,6 +1,7 @@
 import { SignUpController } from './signup-controller'
 import { AddAccount, AddAccountModel, AccountModel, Validator, HttpRequest, Authentication, AuthenticationModel } from './signup-controller-protocols'
-import { badRequest, ok, serverError } from '../../helpers'
+import { badRequest, ok, serverError, forbidden } from '../../helpers'
+import { EmailAlreadyUsed } from '../../errors'
 
 const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
@@ -96,6 +97,14 @@ describe('Controller: SignUp', () => {
     const httpRequest = makeFakeRequest(makeFakeAccount())
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should return 403 if AddAccount returns null', async () => {
+    const { sut, addAccountStub } = makeSut()
+    jest.spyOn(addAccountStub, 'add').mockResolvedValueOnce(null)
+    const httpRequest = makeFakeRequest(makeFakeAccount())
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(forbidden(new EmailAlreadyUsed()))
   })
 
   test('Should return 200 if valid data is provided', async () => {
