@@ -67,6 +67,12 @@ const makeFakeRequest = (data): HttpRequest => ({
   }
 })
 
+const makeFakeError = (): Error => {
+  const error = new Error()
+  error.stack = 'fake_stack'
+  return error
+}
+
 describe('Controller: SignUp', () => {
   test('Should call AddAccount with correct values', async () => {
     const { sut, addAccountStub } = makeSut()
@@ -122,5 +128,15 @@ describe('Controller: SignUp', () => {
     const data = { email, password }
     await sut.handle(makeFakeRequest(data))
     expect(authSpy).toHaveBeenCalledWith(data)
+  })
+
+  test('Should return 500 if Authentication throws', async () => {
+    const { sut, authenticationStub } = makeSut()
+    jest.spyOn(authenticationStub, 'auth').mockRejectedValueOnce(makeFakeError())
+    const { email, password } = makeFakeAccount()
+    const data = { email, password }
+    const response = await sut.handle(makeFakeRequest(data))
+    expect(response).toEqual(serverError(new Error()))
+    expect(response.body.stack).toEqual('fake_stack')
   })
 })
